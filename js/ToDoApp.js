@@ -7,6 +7,7 @@ class ToDoApp {
 
         this.addBtn.addEventListener('click', this.addElement.bind(this));
         this.newTaskId = 0;
+
     }
 
 
@@ -14,42 +15,16 @@ class ToDoApp {
     render() {
         this.htmlTaskList.innerHTML = '';
         this.taskList.tasks.forEach(task => {
-            let taskElement = document.createElement('li');
-            taskElement.classList.add('task');
-            taskElement.dataset.key = task.id;
-            taskElement.innerHTML = `
-        <input type="checkbox" id="${task.id}" class="task__checkbox" ${task.isDone?'checked':''}>
-        <div class="task__desc">
-            <label class="task__name" for="${task.id}">${task.name}</label>
-            <button class="task__remove-btn" data-key="${task.id}"></button>
-        </div>`
-
+            const taskElement = task.create();
             this.htmlTaskList.appendChild(taskElement);
-        })
 
-        const removeBtns = document.querySelectorAll('.task__remove-btn');
-        removeBtns.forEach(btn => {
-            btn.addEventListener('click', this.removeElement.bind(this));
+            task.checkboxHandling(task.id);
+            task.removeBtnHandling(task.id, this.removeElement.bind(this));
+
         });
 
-        const checkboxes = document.querySelectorAll('.task__checkbox');
-        checkboxes.forEach(checkbox => checkbox.addEventListener('click', this.checkDone.bind(this)));
     }
 
-
-    // to TaskList or statistics
-    checkDone(e) {
-        // console.log(e.target);
-        const index = this.taskList.tasks.findIndex(task => task.id == e.target.id);
-        if (e.target.checked) {
-            this.taskList.tasks[index].isDone = true;
-            console.log(this.taskList.tasks)
-        } else if (!e.target.checked) {
-            this.taskList.tasks[index].isDone = false;
-            console.log(this.taskList.tasks)
-
-        }
-    }
 
     addElement() {
         const taskName = this.addInput.value;
@@ -62,6 +37,8 @@ class ToDoApp {
         this.addInput.value = '';
     }
 
+
+    // to TaskList, do 1 method for remove, same for add maybe
     removeElement(e) {
         const id = e.target.dataset.key;
         this.taskList.removeTask(id);

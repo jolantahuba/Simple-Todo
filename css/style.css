@@ -127,6 +127,9 @@
 }
 
 /* List */
+.tasks {
+    width: 90%;
+}
 
 .task {
     display: flex;
