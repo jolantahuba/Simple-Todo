@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <h1 class="heading">S<span class="heading__deco">i</span>mple ToDo</h1>
+        </header>
+
+        <main class="main">
+
+            <div class="add">
+                <div class="add__wrapper">
+                    <img src="images/search.png" alt="" class="add__search-img">
+                    <input type="text" id="task-input" class="add__input" placeholder="Add task">
+                </div>
+                <button class="add__btn">+</button>
+            </div>
+
+            <div class="panel">
+                <p class="panel__done">Done tasks: <span class="panel__done-counter">0</span></p>
+                <button class="panel__remove-done">Remove done</button>
+            </div>
+
+            <ul class="tasks">
+                <li class="task" data-key="1">
+                    <input type="checkbox" id="1" class="task__checkbox">
+                    <div class="task__desc">
+                        <label class="task__name" for="1">Lorem ipsum dolor sit amet, consectetur
+                            adipisicing elit. Asperiores, eos rem sed perspiciatis eius libero excepturi illo ab
+                            inventore aperiam velit quasi et dolorum deserunt a necessitatibus labore aliquid
+                            porro?</label>
+                        <button class="task__remove-btn" data-key="1"></button>
+                    </div>
+                </li>
+                <li class="task" data-key="2">
+                    <input type="checkbox" id="2" class="task__checkbox">
+                    <div class="task__desc">
+                        <label class="task__name" for="2">Lorem, ipsum dolor sit amet consectetur
+                            adipisicing elit. Quis perspiciatis alias distinctio, facilis quo id rem doloremque error
+                            omnis, eius numquam accusamus dolor animi iure libero quod mollitia magni repellat.</label>
+                        <button class="task__remove-btn" data-key="2"></button>
+                    </div>
+                </li>
+                <li class="task" data-key="3">
+                    <input type="checkbox" id="3" class="task__checkbox">
+                    <div class="task__desc">
+                        <label class="task__name" for="3">Go for a walk</label>
+                        <button class="task__remove-btn" data-key="3"></button>
+                    </div>
+                </li>
+            </ul>
+        </main>
+    </div>
+</body>
+
+</html>
