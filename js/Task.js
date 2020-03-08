@@ -19,14 +19,14 @@ class Task {
     }
 
     checkboxHandling(taskId) {
-        const checkbox = document.getElementById(taskId)
+        const checkbox = document.getElementById(taskId);
         checkbox.addEventListener('click', this.checkDone.bind(this));
     }
 
-    removeBtnHandling(taskId, removeCall) {
+    removeBtnHandling(taskId, rmCallback) {
         const removeBtnId = `.task__remove-btn[data-key="${taskId}"]`;
         const removeBtn = document.querySelector(removeBtnId);
-        removeBtn.addEventListener('click', removeCall);
+        removeBtn.addEventListener('click', rmCallback);
     }
 
     checkDone(e) {

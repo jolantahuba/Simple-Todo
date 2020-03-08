@@ -21,17 +21,17 @@
             <div class="add">
                 <div class="add__wrapper">
                     <img src="images/search.png" alt="" class="add__search-img">
-                    <input type="text" id="add__input" class="add__input" placeholder="Add task">
+                    <input type="text" id="addTaskInput" class="add__input" placeholder="Add task">
                 </div>
-                <button class="add__btn">+</button>
+                <button class="add__btn" id="addTaskBtn">+</button>
             </div>
 
             <div class="panel">
-                <p class="panel__done">Done tasks: <span class="panel__done-counter">0</span></p>
-                <button class="panel__remove-done">Remove done</button>
+                <p class="panel__done">Done tasks: <span class="panel__done-counter" id="doneTaskCounter">0</span></p>
+                <button class="panel__remove-done" id="rmDoneBtn">Remove done</button>
             </div>
 
-            <ul class="tasks">
+            <ul class="tasks" id="taskList">
                 <!-- <li class="task" data-key="1">
                     <input type="checkbox" id="1" class="task__checkbox">
                     <div class="task__desc">
@@ -63,9 +63,7 @@
     </div>
 
     <script src="js/Task.js"></script>
-    <script src="js/TaskList.js"></script>
-    <script src="js/Statistics.js"></script>
-    <script src="js/ToDoApp.js"></script>
+    <script src="js/ToDoList.js"></script>
 </body>
 
 </html>
