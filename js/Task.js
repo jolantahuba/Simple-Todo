@@ -2,7 +2,6 @@ class Task {
     constructor(id, name) {
         this.id = id;
         this.name = name;
-        // this.isDone = false;
     }
 
     create() {
@@ -17,26 +16,4 @@ class Task {
         </div>`
         return task;
     }
-
-    // checkboxHandling(taskId) {
-    //     const checkbox = document.getElementById(taskId);
-    //     checkbox.addEventListener('click', this.checkDone.bind(this));
-    // }
-
-    removeBtnHandling(taskId, rmCallback) {
-        const removeBtnId = `.task__remove-btn[data-key="${taskId}"]`;
-        const removeBtn = document.querySelector(removeBtnId);
-        removeBtn.addEventListener('click', rmCallback);
-    }
-
-    // checkDone(e) {
-    //     if (e.target.checked) {
-    //         this.isDone = true;
-    //         console.log(this);
-    //     } else {
-    //         this.isDone = false;
-    //         console.log(this);
-    //     }
-    // }
-
 }
