@@ -6,6 +6,7 @@ class ToDoList {
         this.addTaskBtn = document.getElementById('addTaskBtn');
         this.rmDoneBtn = document.getElementById('rmDoneBtn');
         this.doneTaskCounter = document.getElementById('doneTaskCounter');
+        this.checkboxes = null;
 
         this.addTaskBtn.addEventListener('click', this.addTask.bind(this));
         this.rmDoneBtn.addEventListener('click', this.removeDoneTasks.bind(this));
@@ -21,17 +22,21 @@ class ToDoList {
             const taskElement = task.create();
             this.htmlTaskList.appendChild(taskElement);
 
-            task.checkboxHandling(task.id);
+            // task.checkboxHandling(task.id);
+            task.removeBtnHandling(task.id, this.removeTask.bind(this));
+        });
 
-            const checkbox = document.getElementById(task.id);
+        this.checkboxes = document.querySelectorAll('.task__checkbox');
+        this.countDone();
+    }
+
+    countDone() {
+        this.checkboxes.forEach(checkbox => {
             checkbox.addEventListener('click', () => {
                 checkbox.checked ? this.doneTasks++ : this.doneTasks--;
                 this.doneTaskCounter.textContent = this.doneTasks;
             });
-
-            task.removeBtnHandling(task.id, this.removeTask.bind(this));
         });
-
     }
 
     addTask() {
@@ -57,8 +62,16 @@ class ToDoList {
     }
 
     removeDoneTasks() {
-        const notDone = this.taskList.filter(task => !task.isDone);
-        this.taskList = notDone;
+        // const notDone = this.taskList.filter(task => !task.isDone);
+        // this.taskList = notDone;
+
+        this.checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const index = this.taskList.findIndex(task => task.id == checkbox.id);
+                this.taskList.splice(index, 1);
+            }
+        });
+
         this.render();
     }
 

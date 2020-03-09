@@ -2,7 +2,7 @@ class Task {
     constructor(id, name) {
         this.id = id;
         this.name = name;
-        this.isDone = false;
+        // this.isDone = false;
     }
 
     create() {
@@ -18,10 +18,10 @@ class Task {
         return task;
     }
 
-    checkboxHandling(taskId) {
-        const checkbox = document.getElementById(taskId);
-        checkbox.addEventListener('click', this.checkDone.bind(this));
-    }
+    // checkboxHandling(taskId) {
+    //     const checkbox = document.getElementById(taskId);
+    //     checkbox.addEventListener('click', this.checkDone.bind(this));
+    // }
 
     removeBtnHandling(taskId, rmCallback) {
         const removeBtnId = `.task__remove-btn[data-key="${taskId}"]`;
@@ -29,12 +29,14 @@ class Task {
         removeBtn.addEventListener('click', rmCallback);
     }
 
-    checkDone(e) {
-        if (e.target.checked) {
-            this.isDone = true;
-        } else {
-            this.isDone = false;
-        }
-    }
+    // checkDone(e) {
+    //     if (e.target.checked) {
+    //         this.isDone = true;
+    //         console.log(this);
+    //     } else {
+    //         this.isDone = false;
+    //         console.log(this);
+    //     }
+    // }
 
 }
