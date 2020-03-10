@@ -1,15 +1,20 @@
 class ToDoList {
     constructor() {
         this.taskList = [];
-        this.htmlTaskList = document.getElementById('taskList');
+        this.htmlListContainer = document.getElementById('taskList');
         this.addTaskInput = document.getElementById('addTaskInput');
+        this.doneTaskSpan = document.getElementById('doneTaskSpan');
         this.addTaskBtn = document.getElementById('addTaskBtn');
         this.rmDoneBtn = document.getElementById('rmDoneBtn');
-        this.doneTaskCounter = document.getElementById('doneTaskCounter');
+        this.searchBtn = document.getElementById('searchBtn');
 
         this.addTaskBtn.addEventListener('click', this.addTask.bind(this));
         this.rmDoneBtn.addEventListener('click', this.removeDoneTasks.bind(this));
-        this.addTaskInput.addEventListener('input', Search.searchTask.bind(this));
+
+        this.searchBtn.addEventListener('click', () => {
+            Search.searchTask(this.addTaskInput, this.taskList);
+        });
+
         this.addTaskInput.addEventListener('keydown', e => {
             if (e.keyCode === 13) {
                 this.addTask.call(this);
@@ -21,27 +26,26 @@ class ToDoList {
     }
 
 
-    render(list) {
-        this.htmlTaskList.innerHTML = '';
-        list.forEach(task => {
+    render() {
+        this.htmlListContainer.innerHTML = '';
+        this.taskList.forEach(task => {
             const taskElement = task.create();
-            this.htmlTaskList.appendChild(taskElement);
-        });
+            this.htmlListContainer.appendChild(taskElement);
 
-        const removeBtns = document.querySelectorAll('.task__remove-btn');
-        removeBtns.forEach(btn => btn.addEventListener('click', this.removeTask.bind(this)));
+            task.checkboxHandling(task.id, this.countDone.bind(this));
+            task.removeBtnHandling(task.id, this.removeTask.bind(this));
+        });
 
         this.countDone();
     }
 
     countDone() {
-        const checkboxes = document.querySelectorAll('.task__checkbox');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('click', () => {
-                checkbox.checked ? this.doneTasks++ : this.doneTasks--;
-                this.doneTaskCounter.textContent = this.doneTasks;
-            });
-        });
+        const undone = this.taskList.filter(task => !task.isDone);
+        this.doneTasks = this.taskList.length - undone.length;
+        this.doneTaskSpan.textContent = this.doneTasks;
+
+        // e.target.checked ? this.doneTasks++ : this.doneTasks--;
+        // this.doneTaskSpan.textContent = this.doneTasks;
     }
 
     addTask() {
@@ -52,33 +56,34 @@ class ToDoList {
         }
         this.addTaskInput.value = '';
 
-        this.render(this.taskList);
+        this.render();
     }
 
-    removeTask(e) {
-        const id = e.target.dataset.key;
+    removeTask(id) {
+        // const id = e.target.dataset.key;
         const index = this.taskList.findIndex(task => task.id == id);
         this.taskList.splice(index, 1);
 
-        const taskId = `.task[data-key="${id}"]`;
-        document.querySelector(taskId).remove();
+        this.render();
+
+
+        // const taskId = `.task[data-key="${id}"]`;
+        // document.querySelector(taskId).remove();
     }
 
     removeDoneTasks() {
-        const checkboxes = document.querySelectorAll('.task__checkbox');
+        const undoneTasks = this.taskList.filter(task => !task.isDone);
+        this.taskList = undoneTasks;
+        this.render();
 
-        const checkedTable = [...checkboxes].filter(checkbox => checkbox.checked);
-
-        if (checkedTable.length > 0) {
-            checkedTable.forEach(checkbox => {
-                const index = this.taskList.findIndex(task => task.id == checkbox.id);
-                this.taskList.splice(index, 1);
-
-                const taskId = `.task[data-key="${checkbox.id}"]`;
-                document.querySelector(taskId).remove();
-            });
-        } else return;
+        // const doneTasks = this.taskList.filter(task => task.isDone);
+        // if (doneTasks.length > 0) {
+        //     doneTasks.forEach(doneTask => {
+        //         this.removeTask(doneTask.id);
+        //     });
+        // } else return;
     }
+
 }
 
 
