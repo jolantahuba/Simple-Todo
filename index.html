@@ -19,16 +19,16 @@
         <main class="main">
 
             <div class="add">
-                <div class="add__wrapper">
-                    <img src="images/search.png" alt="" class="add__search-img">
-                    <input type="text" id="addTaskInput" class="add__input" placeholder="Add task">
-                </div>
+                <input type="text" id="addTaskInput" class="add__input" placeholder="Add task">
                 <button class="add__btn" id="addTaskBtn">+</button>
             </div>
 
             <div class="panel">
                 <p class="panel__done">Done tasks: <span class="panel__done-counter" id="doneTaskCounter">0</span></p>
-                <button class="panel__remove-done" id="rmDoneBtn">Remove done</button>
+                <div class="panel__btns">
+                    <button class="panel__rm-done-btn panel__btn" id="rmDoneBtn">Remove done</button>
+                    <button class="panel__search-btn panel__btn" id="searchBtn">Search</button>
+                </div>
             </div>
 
             <ul class="tasks" id="taskList">
