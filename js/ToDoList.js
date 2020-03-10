@@ -12,7 +12,7 @@ class ToDoList {
         this.rmDoneBtn.addEventListener('click', this.removeDoneTasks.bind(this));
 
         this.searchBtn.addEventListener('click', () => {
-            Search.searchTask(this.addTaskInput, this.taskList);
+            Search.searchTask.call(this, this.addTaskInput, this.taskList);
         });
 
         this.addTaskInput.addEventListener('keydown', e => {
@@ -42,16 +42,19 @@ class ToDoList {
     countDone() {
         const undone = this.taskList.filter(task => !task.isDone);
         this.doneTasks = this.taskList.length - undone.length;
-        this.doneTaskSpan.textContent = this.doneTasks;
+        this.doneTaskSpan.textContent = this.taskList.length ? `${this.doneTasks}/${this.taskList.length}` : this.doneTasks;
 
-        // e.target.checked ? this.doneTasks++ : this.doneTasks--;
-        // this.doneTaskSpan.textContent = this.doneTasks;
+        if (this.doneTasks === this.taskList.length && this.doneTasks) {
+            this.doneTaskSpan.style.color = '#197B00';
+        } else {
+            this.doneTaskSpan.style.color = '#C5278C';
+        }
     }
 
     addTask() {
         const taskName = this.addTaskInput.value;
         if (taskName.trim() !== '') {
-            const task = new Task(this.newTaskId++, taskName);
+            const task = new Task(this.newTaskId++, taskName.trim());
             this.taskList.push(task);
         }
         this.addTaskInput.value = '';
@@ -60,12 +63,9 @@ class ToDoList {
     }
 
     removeTask(id) {
-        // const id = e.target.dataset.key;
         const index = this.taskList.findIndex(task => task.id == id);
         this.taskList.splice(index, 1);
-
         this.render();
-
 
         // const taskId = `.task[data-key="${id}"]`;
         // document.querySelector(taskId).remove();
