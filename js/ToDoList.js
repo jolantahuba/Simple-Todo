@@ -11,8 +11,12 @@ class ToDoList {
         this.addTaskBtn.addEventListener('click', this.addTask.bind(this));
         this.rmDoneBtn.addEventListener('click', this.removeDoneTasks.bind(this));
 
+        // this.searchBtn.addEventListener('click', () => {
+        //     Search.searchTask.call(this, this.addTaskInput, this.taskList);
+        // });
+
         this.searchBtn.addEventListener('click', () => {
-            Search.searchTask.call(this, this.addTaskInput, this.taskList);
+            this.taskList = Search.searchTask(this, this.addTaskInput);
         });
 
         this.addTaskInput.addEventListener('keydown', e => {
