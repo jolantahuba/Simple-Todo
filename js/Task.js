@@ -6,14 +6,14 @@ class Task {
     }
 
     create() {
-        let task = document.createElement('li');
+        const task = document.createElement('li');
         task.classList.add('task');
-        task.dataset.key = this.id;
+        task.dataset.taskId = this.id;
         task.innerHTML = `
         <input type="checkbox" id="${this.id}" class="task__checkbox" ${this.isDone?'checked':''}>
         <div class="task__desc">
         <label class="task__name" for="${this.id}">${this.name}</label>
-        <button class="task__remove-btn" data-key="${this.id}"></button>
+        <button class="task__remove-btn" data-task-id="${this.id}"></button>
         </div>`
 
         return task;
@@ -26,18 +26,15 @@ class Task {
     }
 
     removeBtnHandling(taskId, rmCallback) {
-        const removeBtnId = `.task__remove-btn[data-key="${taskId}"]`;
+        const removeBtnId = `.task__remove-btn[data-task-id="${taskId}"]`;
         const removeBtn = document.querySelector(removeBtnId);
-        // removeBtn.addEventListener('click', rmCallback);
         removeBtn.addEventListener('click', function () {
-            // console.log(this);
-            // console.log(this.dataset.key);
-            rmCallback(this.dataset.key);
+            //this = remove button
+            rmCallback(this.dataset.taskId);
         });
     }
 
     setDone() {
         this.isDone = !this.isDone;
-        // console.log(this);
     }
 }

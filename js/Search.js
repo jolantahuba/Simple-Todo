@@ -2,74 +2,47 @@ class Search {
     constructor() {}
 
     static searchTask(mainList, input) {
-        // console.log(this);
-        const searchList = new ToDoList();
-        console.log(searchList);
+        console.log(this);
+        const searchList = new List();
         const backSearchBtn = document.getElementById('backSearchBtn');
         const infoSearchText = document.getElementById('infoSearchText');
+        const addTaskPanel = document.getElementById('addTaskPanel');
+        const btnsPanel = document.getElementById('btnsPanel');
 
         const phrase = input.value.trim();
-        searchList.taskList = mainList.taskList.filter(task => task.name.includes(phrase));
-
+        searchList.tasks = mainList.tasks.filter(task => task.name.includes(phrase));
         searchList.render();
 
-        //info panel
-        backSearchBtn.style.visibility = 'visible';
-        infoSearchText.style.visibility = 'visible';
+        this.backSearchBtn.style.display = 'block';
+        this.infoSearchText.style.display = 'block';
+        this.addTaskPanel.style.display = 'none';
+        this.btnsPanel.style.display = 'none';
 
-        backSearchBtn.addEventListener('click', () => {
-            mainList.taskList = [...mainList.taskList, ...searchList.taskList];
-            //remove duplicates:
-            mainList.taskList = [...new Set(mainList.taskList)];
-            // mainList.render();
-
-            backSearchBtn.style.visibility = 'hidden';
-            infoSearchText.style.visibility = 'hidden';
-            return mainList.taskList;
-
-        });
-
-        if (searchList.taskList.length) {
-            infoSearchText.textContent = 'Search results:'
+        if (searchList.tasks.length) {
+            infoSearchText.textContent = `Search results for "${phrase}":`
             infoSearchText.style.color = 'black';
         } else {
-            infoSearchText.textContent = 'No results';
+            infoSearchText.textContent = `No results for "${phrase}"`;
             infoSearchText.style.color = 'red';
         }
+
+        backSearchBtn.addEventListener('click', () => {
+            backSearchBtn.style.display = 'none';
+            infoSearchText.style.display = 'none';
+            addTaskPanel.style.display = 'flex';
+            btnsPanel.style.display = 'flex';
+
+            //sync and remove duplicates
+            mainList.tasks = [...this.mainList.tasks, ...this.searchList.tasks];
+            mainList.tasks = [...new Set(this.mainList.tasks)];
+            mainList.render();
+
+            return mainList.tasks;
+        });
 
 
     }
 
 
-    // static searchTask(input, list) {
-    //     const backSearchBtn = document.getElementById('backSearchBtn');
-    //     const infoSearchText = document.getElementById('infoSearchText');
-    //     const phrase = input.value.trim();
-    //     const searchList = list.filter(task => task.name.includes(phrase));
 
-    //     list.forEach(task => {
-    //         const element = document.querySelector(`.task[data-key="${task.id}"]`);
-    //         if (!task.name.includes(phrase)) {
-    //             element.style.display = 'none';
-    //         } else {
-    //             element.style.display = 'flex';
-    //         }
-    //     });
-
-    //     backSearchBtn.style.visibility = 'visible';
-    //     infoSearchText.style.visibility = 'visible';
-
-    //     backSearchBtn.addEventListener('click', () => {
-    //         this.render();
-    //         backSearchBtn.style.display = 'none';
-    //     });
-
-    //     if (searchList.length) {
-    //         infoSearchText.textContent = 'Search results:'
-    //         infoSearchText.style.color = 'black';
-    //     } else {
-    //         infoSearchText.textContent = 'No results';
-    //         infoSearchText.style.color = 'red';
-    //     }
-    // }
 }
