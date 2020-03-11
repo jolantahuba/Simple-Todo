@@ -178,9 +178,10 @@
 }
 
 .task__name {
-    width: 100%;
+    width: calc(100% - 50px);
     font-size: .9rem;
     padding: 12px 5px 12px 12px;
+    overflow-wrap: break-word;
 }
 
 .task__remove-btn {
