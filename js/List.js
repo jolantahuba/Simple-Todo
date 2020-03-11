@@ -13,10 +13,10 @@ class List {
             const taskElement = task.create();
             this.listContainer.appendChild(taskElement);
 
-            task.checkboxHandling(task.id, this.countDone.bind(this));
+            task.checkboxHandling(task.id, this.showDone.bind(this));
             task.removeBtnHandling(task.id, this.removeTask.bind(this));
         }
-        this.countDone();
+        this.showDone();
     }
 
     removeTask(id) {
@@ -26,7 +26,7 @@ class List {
         const taskId = `.task[data-task-id="${id}"]`;
         document.querySelector(taskId).remove();
 
-        this.countDone();
+        this.showDone();
     }
 
     removeDoneTasks() {
@@ -38,10 +38,10 @@ class List {
             });
         } else return;
 
-        this.countDone();
+        this.showDone();
     }
 
-    countDone() {
+    showDone() {
         const doneTasks = this.tasks.filter(task => task.isDone).length;
 
         this.doneTaskSpan.textContent = this.tasks.length ? `${doneTasks}/${this.tasks.length}` : doneTasks;

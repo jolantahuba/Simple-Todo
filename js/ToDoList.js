@@ -23,10 +23,6 @@ class ToDoList {
         this.taskList.addTask(this.newTaskId++, name);
         this.addTaskInput.value = '';
     }
-
-    // rmDoneBtnHandling() {
-    //     this.taskList.removeDoneTasks();
-    // }
 }
 
 const app = new ToDoList();

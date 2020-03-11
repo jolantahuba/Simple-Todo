@@ -14,7 +14,7 @@ class Task {
         <div class="task__desc">
         <label class="task__name" for="${this.id}">${this.name}</label>
         <button class="task__remove-btn" data-task-id="${this.id}"></button>
-        </div>`
+        </div>`;
 
         return task;
     }
@@ -29,7 +29,7 @@ class Task {
         const removeBtnId = `.task__remove-btn[data-task-id="${taskId}"]`;
         const removeBtn = document.querySelector(removeBtnId);
         removeBtn.addEventListener('click', function () {
-            //this = remove button
+            //this = button
             rmCallback(this.dataset.taskId);
         });
     }
