@@ -19,14 +19,14 @@
 
         <main class="main">
             <div class="add">
-                <label for="addTaskInput" class="add__label">Add new task</label>
-                <input type="text" id="addTaskInput" name="taskName" class="add__input" placeholder="Add task">
-                <button class="add__btn" id="addTaskBtn">+</button>
+                <input type="text" id="addTaskInput" name="taskName" class="add__input" placeholder="Task name"
+                    aria-label="New task name">
+                <button class="add__btn" id="addTaskBtn" aria-label="Add new task">+</button>
             </div>
 
             <div class="panel">
                 <p class="panel__done">Done tasks:<span class="panel__done-counter" id="doneTaskSpan">0</span></p>
-                <button class="panel__rm-done-btn btn" id="rmDoneBtn">Remove done</button>
+                <button class="panel__rm-done-btn btn" id="rmDoneBtn">Remove done tasks</button>
             </div>
 
             <ul class="tasks" id="taskList">

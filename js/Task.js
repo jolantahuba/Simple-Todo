@@ -13,7 +13,7 @@ class Task {
         <input type="checkbox" id="${this.id}" class="task__checkbox" ${this.isDone?'checked':''}>
         <div class="task__desc">
         <label class="task__name" for="${this.id}">${this.name}</label>
-        <button class="task__remove-btn" data-task-id="${this.id}"></button>
+        <button aria-label="Remove task" class="task__remove-btn" data-task-id="${this.id}"></button>
         </div>`;
 
         return task;

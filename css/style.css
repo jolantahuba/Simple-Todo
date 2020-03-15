@@ -56,12 +56,6 @@
     align-items: center;
 }
 
-.add__label {
-    position: absolute;
-    top: 0;
-    left: -100%;
-}
-
 .add__input {
     font-family: 'Roboto', sans-serif;
     font-size: .9rem;
