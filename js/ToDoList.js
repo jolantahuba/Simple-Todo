@@ -32,9 +32,10 @@ class ToDoList {
     }
 
     loadTaskList() {
-        const loadedTasks = JSON.parse(localStorage.getItem('taskList'));
+        let loadedTasks = JSON.parse(localStorage.getItem('taskList'));
         const newId = JSON.parse(localStorage.getItem('newTaskId'));
-        if (loadedTasks.length) {
+
+        if (loadedTasks && loadedTasks.length) {
             loadedTasks.forEach(loadedTask => {
                 this.taskList.addTask(loadedTask.id, loadedTask.name, loadedTask.isDone);
             });
