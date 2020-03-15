@@ -33,7 +33,7 @@
     display: block;
     position: absolute;
     content: '';
-    background-image: url('../images/checkmark.png');
+    background-image: url('../images/logo.png');
     background-size: contain;
     width: 1.7em;
     height: 1.7em;
