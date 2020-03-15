@@ -8,20 +8,48 @@ class ToDoList {
         this.addTaskBtn = document.getElementById('addTaskBtn');
         this.rmDoneBtn = document.getElementById('rmDoneBtn');
 
-        this.addTaskBtn.addEventListener('click', this.addBtnHandling.bind(this));
-        this.rmDoneBtn.addEventListener('click', this.taskList.removeDoneTasks.bind(this.taskList));
+        this.startApp();
+        this.saveTaskList();
+        this.loadTaskList();
+    }
+
+    startApp() {
+        this.addTaskBtn.addEventListener('click', () => {
+            const taskName = this.addTaskInput.value.trim();
+            this.taskList.addTask(this.newTaskId++, taskName);
+            this.addTaskInput.value = '';
+        });
 
         this.addTaskInput.addEventListener('keydown', e => {
             if (e.keyCode === 13) {
-                this.addBtnHandling.call(this);
+                const taskName = this.addTaskInput.value.trim();
+                this.taskList.addTask(this.newTaskId++, taskName);
+                this.addTaskInput.value = '';
             }
         });
+
+        this.rmDoneBtn.addEventListener('click', this.taskList.removeDoneTasks.bind(this.taskList));
     }
 
-    addBtnHandling() {
-        const name = this.addTaskInput.value.trim();
-        this.taskList.addTask(this.newTaskId++, name);
-        this.addTaskInput.value = '';
+    loadTaskList() {
+        const loadedTasks = JSON.parse(localStorage.getItem('taskList'));
+        const newId = JSON.parse(localStorage.getItem('newTaskId'));
+        if (loadedTasks.length) {
+            loadedTasks.forEach(loadedTask => {
+                this.taskList.addTask(loadedTask.id, loadedTask.name, loadedTask.isDone);
+            });
+            this.newTaskId = newId;
+        } else {
+            this.newTaskId = 0;
+        }
+    }
+
+    saveTaskList() {
+        window.addEventListener("beforeunload", () => {
+            localStorage.clear();
+            localStorage.setItem('taskList', JSON.stringify(this.taskList.tasks));
+            localStorage.setItem('newTaskId', this.newTaskId);
+        });
     }
 }
 

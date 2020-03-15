@@ -5,9 +5,9 @@ class List {
         this.doneTaskSpan = document.getElementById('doneTaskSpan');
     }
 
-    addTask(id, name) {
+    addTask(id, name, isDone) {
         if (name.trim() !== '') {
-            const task = new Task(id, name);
+            const task = new Task(id, name, isDone);
             this.tasks.push(task);
 
             const taskElement = task.create();

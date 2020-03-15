@@ -1,8 +1,8 @@
 class Task {
-    constructor(id, name) {
+    constructor(id, name, isDone = false) {
         this.id = id;
         this.name = name;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     create() {
