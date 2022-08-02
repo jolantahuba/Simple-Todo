@@ -1,8 +1,9 @@
 # Simple-Todo
+
+Available here: https://jolantahuba.github.io/Simple-Todo/
+
 ## About
 Simple Todo application project, first attempt in OOP JavaScript.
-
-Live: https://jolantahuba.github.io/Simple-Todo/
 
 ## Features
 - Add and remove task to the list
